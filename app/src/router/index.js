@@ -3,15 +3,15 @@ import Home from '@/views/Home.vue'
 
 const routes = [
   {
-    path: '/home',
-    name: 'Home',
-    component: Home,
-  },
-  {
-    path: '/dish',
+    path: '/',
     name: 'Dish',
     component: Home,
     children: [
+      {
+        path: '/',
+        name: 'Home',
+        component: Home,
+      },
       {
         path: '/:id',
         name: 'DishView',
