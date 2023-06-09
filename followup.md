@@ -10,6 +10,8 @@ Vue-router - for handling navigation and common routing through the vue project
 ESLint and Prettied - linters and formatters for better code style
 
 2. What would you change about your implementation if you had to handle thousands of items?
+
+
    -> 1. I would change the script and template languages to typescript for better dev experience.
 3. I would use better UX and UI for fetching data and navigation (instead of dialogs), would add infinitescroll, some caching techniques for handling huge amount of data on clientside
 4. Components bundle size, need to look at the dynamic imports and routing
@@ -17,6 +19,8 @@ ESLint and Prettied - linters and formatters for better code style
 ## General
 
 1. If you had more time, what further improvements or new features would you add?
+
+
    -> I would add more error handling cases. So here is the list of the features I would add:
 
 - Filters and search
@@ -25,7 +29,11 @@ ESLint and Prettied - linters and formatters for better code style
 - User roles
 
 2. Which parts are you most proud of? And why?
+
+
    -> The structure of the project. I can say it is clear to add or remove a feature in the project: store model, a page, component, api endpoint
+   
+   
 3. Which parts did you spend the most time with? What did you find most difficult?
    The part of brainstorming and creating first mockups, how to actually represent data in the most effective, quickest way
 
