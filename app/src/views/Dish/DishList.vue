@@ -4,7 +4,7 @@
   </p>
   <el-row :gutter="24">
     <el-col
-      v-for="dish in dishes"
+      v-for="dish in dishes.filter(item => item.category === selectedCategory || selectedCategory === 'All')"
       :key="dish._id"
       :span="6"
     >
@@ -18,7 +18,7 @@
     </el-col>
   </el-row>
   <el-container
-    v-if="!dishes.length"
+    v-if="!dishes.filter(item => item.category === selectedCategory || selectedCategory === 'All').length"
   >
     <p class="no-text">
       No dishes.
@@ -34,27 +34,17 @@
   import router from '@/router';
 
   const store = useStore()
-
-  const dishes = computed(() => {
-
-    const items = store.getters['dish/dishes'];
-
-    if (selectedCategory.value != 'All') {
-      items.filter(item => item.category === selectedCategory.value)
-    }
-    return items;
-  })
   const route = useRoute()
 
   const selectedCategory = computed(() => route.query.category || 'All')
+  const dishes = computed(() => store.getters['dish/dishes'])
   
   onMounted(() => {
     store.dispatch('dish/getDishes')
   })
 
   watch(selectedCategory, () => {
-    console.log('selectedCategory', selectedCategory.value)  
-  })
+  },{immediate:true})
 
   const onCardClick = (dish) => {
     router.push({ name: 'DishList', query: { dish_id: dish._id } })

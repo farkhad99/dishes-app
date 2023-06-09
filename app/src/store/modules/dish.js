@@ -14,7 +14,6 @@ const dish = {
 
   mutations: {
     SET_DISHES: (state, dishes) => {
-      console.log(dishes)
       state.dishes = dishes
     },
 
@@ -45,6 +44,10 @@ const dish = {
 
   getters: {
     dishes: (state) => state.dishes,
+    getFilteredDishes: (state) => (category) => {
+      if (!category || category === 'All') return state.dishes
+      else return state.dises.filter((item) => item.category === category)
+    },
     getCurrentDish: (state) => state.currentDish,
     isModalVisible: (state) => state.isModalVisible,
   },
@@ -53,7 +56,6 @@ const dish = {
     createDish: async ({ commit }, newDish) => {
       try {
         commit('SET_LOADING', true)
-        console.log(newDish)
         const response = await dishApi.create(newDish)
         commit('SET_CURRENT_DISH', response.data)
         commit('ADD_DISH_TO_LIST', response.data)

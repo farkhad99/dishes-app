@@ -51,8 +51,7 @@ import { useRoute } from 'vue-router';
         store.dispatch('dish/clearDishes')
         done()
       })
-      .catch((err) => {
-        console.log(err)
+      .catch(() => {
         // catch error
       })
   }

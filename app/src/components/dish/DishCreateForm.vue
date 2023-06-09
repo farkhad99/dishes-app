@@ -135,7 +135,6 @@
 
   const onSubmit = async (formEl) => {
     if (!formEl) return;
-    console.log(formEl.value)
     const isValid = await formEl.validate()
     
     if (isValid) {
