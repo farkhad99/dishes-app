@@ -47,6 +47,7 @@
 <style lang="scss">
 .dish-view-card {
   max-height: 400px;
+  transition: all .2s ease-in-out;
 
   &__price {
     font-size: 12px;
@@ -62,5 +63,15 @@
     width: 100%;
     display: block;
   }
+}
+
+.dish-view-card:hover {
+  transform: scale(1.06);
+  cursor: pointer;
+}
+
+.dish-view-card:active {
+  transform: scale(1.04);
+  cursor: pointer;
 }
 </style>

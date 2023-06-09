@@ -11,6 +11,7 @@
         :description="dish.description"
         :price="dish.price"
         :image-url="dish.imageUrl"
+        @click="onCardClick(dish)"
       />
     </el-col>
   </el-row>
@@ -26,8 +27,9 @@
 <script setup>
   import { onMounted, computed } from 'vue'
   import { useStore } from 'vuex'
-  import DishViewCard from '../../components/DishViewCard.vue';
+  import DishViewCard from '../../components/dish/DishViewCard.vue';
   import { useRoute } from 'vue-router'
+  import router from '@/router';
 
   const store = useStore()
 
@@ -39,6 +41,10 @@
   onMounted(() => {
     store.dispatch('dish/getDishes')
   })
+
+  const onCardClick = (dish) => {
+    router.push({ name: 'DishList', query: { dish_id: dish._id } })
+  }
 </script>
 
 <style>

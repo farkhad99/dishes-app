@@ -23,17 +23,22 @@
       </el-container>
     </el-container>
     <DishCreateModal />
+    <DishDetailModal />
   </div>
 </template>
 
 <script setup>
-import DishCreateModal from '../components/DishCreateModal.vue'
+import DishCreateModal from '../components/dish/DishCreateModal.vue'
+import DishDetailModal from '../components/dish/DishDetailModal.vue'
 import SideBar from './SideBar.vue'
 import { ElMessageBox } from 'element-plus'
 import { Delete } from '@element-plus/icons-vue'
 import { useStore } from 'vuex';
+import { watch } from 'vue';
+import { useRoute } from 'vue-router';
 
   const store = useStore()
+  const route = useRoute();
 
   const openNewDishModal = () => {
     store.commit('dish/SET_NEW_DISH_MODAL_VISIBLE', true)
@@ -49,6 +54,13 @@ import { useStore } from 'vuex';
         // catch error
       })
   }
+
+  watch(() => route.query.dish_id, () => {
+    if (route.query.dish_id) {
+      store.dispatch('dish/getDish', route.query.dish_id)
+      store.commit('dish/SET_DISH_DETAIL_MODAL_VISIBLE', true)
+    }
+  })
 </script>
 
 <style lang="scss">

@@ -17,7 +17,7 @@
         type="number"
       />
     </el-form-item>
-    <el-form-item label="Wait time">
+    <el-form-item label="Wait time (minutes)">
       <el-input
         v-model="form.waitTime"
         type="number"
