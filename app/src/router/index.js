@@ -1,16 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/views/Home.vue'
+import DishList from '@/views/Dish/DishList.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Dish',
-    component: Home,
     children: [
       {
         path: '/',
-        name: 'Home',
-        component: Home,
+        name: 'DishList',
+        component: DishList,
       },
       {
         path: '/:id',
