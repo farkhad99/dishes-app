@@ -5,25 +5,43 @@
     :model="form"
     :rules="rules"
   >
-    <el-form-item label="Name">
-      <el-input v-model="form.name" />
+    <el-form-item
+      label="Name"
+      prop="name"
+    >
+      <el-input
+        v-model="form.name"
+        required
+      />
     </el-form-item>
-    <el-form-item label="Image URL">
+    <el-form-item
+      label="Image URL"
+      prop="imageUrl"
+    >
       <el-input v-model="form.imageUrl" />
     </el-form-item>
-    <el-form-item label="Price">
+    <el-form-item
+      label="Price"
+      prop="price"
+    >
       <el-input
         v-model="form.price"
         type="number"
       />
     </el-form-item>
-    <el-form-item label="Wait time (minutes)">
+    <el-form-item
+      label="Wait time (min)"
+      prop="waitTime"
+    >
       <el-input
         v-model="form.waitTime"
         type="number"
       />
     </el-form-item>
-    <el-form-item label="Category">
+    <el-form-item
+      label="Category"
+      prop="category"
+    >
       <el-select
         v-model="form.category"
         placeholder="please select dish category"
@@ -36,7 +54,9 @@
         />
       </el-select>
     </el-form-item>
-    <el-form-item label="Available time">
+    <el-form-item
+      label="Available time"
+    >
       <el-col :span="24">
         <el-checkbox
           v-model="isAlwasAvailable"
@@ -58,7 +78,10 @@
         />
       </el-select>
     </el-form-item>
-    <el-form-item label="Description">
+    <el-form-item
+      label="Description"
+      prop="description"
+    >
       <el-input
         v-model="form.description"
         type="textarea"
@@ -81,13 +104,13 @@
   import { CATEGORIES, AVAILABILITY_PERIODS } from '@/constants/dish';
   import { useStore } from 'vuex';
 
-  const isAlwasAvailable = ref(false)
+  const isAlwasAvailable = ref(true)
 
   const ruleFormRef = ref()
   const form = reactive({
     name: null,
     description: '',
-    category: '',
+    category: 'Main Course',
     availableOn: '',
     price: null,
     waitTime: null,
@@ -97,17 +120,27 @@
   const rules = reactive({
     name: [{ required: true, message: 'Please select dish name', trigger: 'blur' }],
     description: [{ required: true, message: 'Please enter dish description', trigger: 'blur' }],
+    price: [{ required: true, message: 'Please enter dish price', trigger: 'blur' }],
+    imageUrl: [{ required: true, message: 'Please enter dish imageUrl', trigger: 'blur' }],
+    waitTime: [{ required: true, message: 'Please enter dish wait Time', trigger: 'blur' }],
+    category: [{ required: true, message: 'Please select category', trigger: 'blur' }],
   })
 
   const store = useStore();
 
+  const resetForm = (formEl) => {
+    if (!formEl) return
+    formEl.resetFields()
+  }
+
   const onSubmit = async (formEl) => {
     if (!formEl) return;
-
+    console.log(formEl.value)
     const isValid = await formEl.validate()
-
+    
     if (isValid) {
       store.dispatch('dish/createDish', form);
+      resetForm(formEl)
     }
   }
 </script>

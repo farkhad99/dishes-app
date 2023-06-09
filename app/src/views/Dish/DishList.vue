@@ -3,10 +3,12 @@
     {{ selectedCategory }}
   </p>
   <el-row :gutter="24">
-    <el-col :span="6">
+    <el-col
+      v-for="dish in dishes"
+      :key="dish._id"
+      :span="6"
+    >
       <DishViewCard
-        v-for="dish in dishes"
-        :key="dish._id"
         :name="dish.name"
         :description="dish.description"
         :price="dish.price"
@@ -25,7 +27,7 @@
 </template>
 
 <script setup>
-  import { onMounted, computed } from 'vue'
+  import { onMounted, computed, watch } from 'vue';
   import { useStore } from 'vuex'
   import DishViewCard from '../../components/dish/DishViewCard.vue';
   import { useRoute } from 'vue-router'
@@ -33,13 +35,25 @@
 
   const store = useStore()
 
-  const dishes = computed(() => store.getters['dish/dishes'])
+  const dishes = computed(() => {
+
+    const items = store.getters['dish/dishes'];
+
+    if (selectedCategory.value != 'All') {
+      items.filter(item => item.category === selectedCategory.value)
+    }
+    return items;
+  })
   const route = useRoute()
 
   const selectedCategory = computed(() => route.query.category || 'All')
   
   onMounted(() => {
     store.dispatch('dish/getDishes')
+  })
+
+  watch(selectedCategory, () => {
+    console.log('selectedCategory', selectedCategory.value)  
   })
 
   const onCardClick = (dish) => {

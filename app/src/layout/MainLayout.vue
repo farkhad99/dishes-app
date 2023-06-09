@@ -11,6 +11,7 @@
             New dish
           </el-button>
           <el-button
+            v-if="$store.state.dish.dishes.length"
             type="danger"
             :icon="Delete"
             circle
