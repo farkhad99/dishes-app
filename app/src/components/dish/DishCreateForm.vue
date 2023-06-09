@@ -74,7 +74,6 @@
       <el-button>Cancel</el-button>
     </el-form-item>
   </el-form>
-  {{ form }}
 </template>
   
 <script setup>

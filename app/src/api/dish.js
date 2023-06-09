@@ -32,7 +32,7 @@ export default {
   deleteDish: (id, params) =>
     request({
       url: `/dishes/${id}`,
-      method: 'get',
+      method: 'delete',
       params,
     }),
 

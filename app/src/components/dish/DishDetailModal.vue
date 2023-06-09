@@ -69,6 +69,17 @@
         {{ currentDish.description }}
       </el-descriptions-item>
     </el-descriptions>
+    <el-container class="dish-detail-modal__footer">
+      <el-button
+        type="danger"
+        @click="onDeleteDish"
+      >
+        Delete
+      </el-button>
+      <el-button type="info">
+        Edit
+      </el-button>
+    </el-container>
   </el-dialog>
 </template>
   
@@ -76,6 +87,7 @@
 import { useStore } from 'vuex';
 import { computed } from 'vue';
 import router from '@/router';
+import { ElMessageBox } from 'element-plus'
 
 const store = useStore()
 
@@ -85,5 +97,24 @@ const currentDish = computed(() => store.getters['dish/getCurrentDish'])
 const onClose = () => {
   router.replace('/')
 }
+
+const onDeleteDish = (done) => {
+    ElMessageBox.confirm(`Are you sure to delete ${currentDish.value.name}?`)
+      .then(() => {
+        store.dispatch('dish/deleteDish', currentDish.value._id)
+        done()
+      })
+      .catch(() => {
+        // catch error
+      })
+  }
 </script>
   
+
+<style lang="scss">
+.dish-detail-modal__footer {
+  display: flex;
+  margin-top: 15px;
+  justify-content: end;
+}
+</style>

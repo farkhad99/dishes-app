@@ -14,7 +14,7 @@
             type="danger"
             :icon="Delete"
             circle
-            @click="handleClearDishes"
+            @click="onClearDishes"
           />
         </el-header>
         <el-main>
@@ -44,13 +44,14 @@ import { useRoute } from 'vue-router';
     store.commit('dish/SET_NEW_DISH_MODAL_VISIBLE', true)
   }
 
-  const handleClearDishes = (done) => {
+  const onClearDishes = (done) => {
     ElMessageBox.confirm('Are you sure to remove all the dishes?')
       .then(() => {
-        this.$store.dispatch('dish/clearDishes')
+        store.dispatch('dish/clearDishes')
         done()
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err)
         // catch error
       })
   }
