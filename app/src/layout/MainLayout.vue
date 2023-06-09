@@ -6,6 +6,7 @@
         <el-header class="main-header m-3 flex">
           <el-button
             class="main-header__new-button"
+            @click="openNewDishModal"
           >
             New dish
           </el-button>
@@ -13,7 +14,6 @@
         <el-main>
           <slot />
         </el-main>
-        <el-footer>Footer</el-footer>
       </el-container>
     </el-container>
     <DishCreateModal />
@@ -22,6 +22,7 @@
 
 <script>
 import { defineComponent } from 'vue'
+import DishCreateModal from '../components/DishCreateModal.vue'
 import SideBar from './SideBar.vue'
 
 export default defineComponent({
@@ -29,13 +30,25 @@ export default defineComponent({
 
   components: {
     SideBar,
+    DishCreateModal,
+  },
+
+  methods: {
+    openNewDishModal() {
+      this.$store.commit('dish/SET_NEW_DISH_MODAL_VISIBLE', true)
+    },
   },
 })
 </script>
 
 <style lang="scss">
 .main-layout {
+  padding-top: 0;
   height: 100%;
+}
+
+.el-main {
+  padding-top: 0!important;
 }
 
 .el-container {
