@@ -2,10 +2,19 @@
   <v-card class="rounded-sm">
     {{ dishes }}
   </v-card>
-  <DishViewCard
-    v-for="dish in dishes"
-    :key="dish._id"
-  />
+  <el-row :gutter="20">
+    <el-col :span="6">
+      <DishViewCard
+        v-for="dish in dishes"
+        :key="dish._id"
+        :name="dish.name"
+        :description="dish.description"
+        :price="dish.price"
+        :image-url="dish.imageUrl"
+      />
+    </el-col>
+  </el-row>
+
   <el-container
     v-if="!dishes.length"
   >
