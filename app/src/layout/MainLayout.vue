@@ -10,6 +10,12 @@
           >
             New dish
           </el-button>
+          <el-button
+            type="danger"
+            :icon="Delete"
+            circle
+            @click="handleClearDishes"
+          />
         </el-header>
         <el-main>
           <slot />
@@ -20,25 +26,29 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup>
 import DishCreateModal from '../components/DishCreateModal.vue'
 import SideBar from './SideBar.vue'
+import { ElMessageBox } from 'element-plus'
+import { Delete } from '@element-plus/icons-vue'
+import { useStore } from 'vuex';
 
-export default defineComponent({
-  name: 'MainLayout',
+  const store = useStore()
 
-  components: {
-    SideBar,
-    DishCreateModal,
-  },
+  const openNewDishModal = () => {
+    store.commit('dish/SET_NEW_DISH_MODAL_VISIBLE', true)
+  }
 
-  methods: {
-    openNewDishModal() {
-      this.$store.commit('dish/SET_NEW_DISH_MODAL_VISIBLE', true)
-    },
-  },
-})
+  const handleClearDishes = (done) => {
+    ElMessageBox.confirm('Are you sure to remove all the dishes?')
+      .then(() => {
+        this.$store.dispatch('dish/clearDishes')
+        done()
+      })
+      .catch(() => {
+        // catch error
+      })
+  }
 </script>
 
 <style lang="scss">
@@ -61,7 +71,7 @@ export default defineComponent({
   align-items: center;
 
   &__new-button {
-    margin-right: 15px;
+    margin-right: 5px;
   }
 
   &__user {

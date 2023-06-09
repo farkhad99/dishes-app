@@ -1,8 +1,8 @@
 <template>
-  <v-card class="rounded-sm">
-    {{ dishes }}
-  </v-card>
-  <el-row :gutter="20">
+  <p class="dish-list-title font-600 mr-3">
+    {{ selectedCategory }}
+  </p>
+  <el-row :gutter="24">
     <el-col :span="6">
       <DishViewCard
         v-for="dish in dishes"
@@ -14,7 +14,6 @@
       />
     </el-col>
   </el-row>
-
   <el-container
     v-if="!dishes.length"
   >
@@ -28,11 +27,15 @@
   import { onMounted, computed } from 'vue'
   import { useStore } from 'vuex'
   import DishViewCard from '../../components/DishViewCard.vue';
+  import { useRoute } from 'vue-router'
 
   const store = useStore()
 
   const dishes = computed(() => store.getters['dish/dishes'])
+  const route = useRoute()
 
+  const selectedCategory = computed(() => route.query.category || 'All')
+  
   onMounted(() => {
     store.dispatch('dish/getDishes')
   })
@@ -42,5 +45,11 @@
 .no-text {
   width: 100%;
   text-align: center;
+}
+
+.dish-list-title {
+  font-size: 21px;
+  font-weight: 800;
+  margin-top: 0;
 }
 </style>
