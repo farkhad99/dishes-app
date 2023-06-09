@@ -1,5 +1,5 @@
 <template>
-  <div>DishCreate</div>
+  <div />
 </template>
 
 <script>

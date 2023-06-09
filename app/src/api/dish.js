@@ -8,18 +8,18 @@ export default {
       params,
     }),
 
-  create: (params) =>
+  create: (data) =>
     request({
       url: '/dishes',
       method: 'put',
-      params,
+      data,
     }),
 
-  update: (id, params) =>
+  update: (id, data) =>
     request({
       url: `/dishes/${id}`,
       method: 'put',
-      params,
+      data,
     }),
 
   getDish: (id, params) =>

@@ -7,3 +7,11 @@ export const CATEGORIES = [
   'Dessert',
   'Beverage',
 ]
+
+export const AVAILABILITY_PERIODS = [
+  'breakfast',
+  'dinner',
+  'lunch',
+  'weekdays',
+  'weekends',
+]
