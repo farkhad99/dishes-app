@@ -22,6 +22,13 @@ export default {
       params,
     }),
 
+  getDish: (id, params) =>
+    request({
+      url: `/dishes/${id}`,
+      method: 'get',
+      params,
+    }),
+
   deleteDish: (id, params) =>
     request({
       url: `/dishes/${id}`,
