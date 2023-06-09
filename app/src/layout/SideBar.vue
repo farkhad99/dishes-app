@@ -9,6 +9,9 @@
       class="el-menu-vertical-demo"
       default-active="1"
     >
+      <h1 class="sidebar__title">
+        QUICK MENU
+      </h1>
       <el-menu-item
         v-for="category,index in categories"
         :key="category"
@@ -54,12 +57,18 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .el-menu {
   height: 100%;
 }
 
 .sidebar {
+  &__title {
+    padding-left: 20px;
+    padding-top: 20px;
+    margin: 0px;
+    margin-bottom: 20px;
+  }
 
   &__user {
     position: absolute;
